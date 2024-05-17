@@ -1,21 +1,25 @@
 // @ts-check
 
-import { state } from "./state.js";
+import { state, Task } from "./modules/state.js";
 
-// console.log("It works");
-// const addTaskToHtml = (id)  => {
 
-// }
-// const list =document.querySelector('[data-list]')
-// const isHtmlElement = list instanceof HTMLElement;
 
-// if (!isHtmlElement) {
-//     throw new Error('"data-list" attribute not found in HTML');
-// }
 
-// const preview = document.createElement('li');
-// preview.className = "task";
-// preview.dataset.task = id;
+
+/**
+ * 
+ * @param {string} id 
+ */
+
+const addTaskToHtml = (id)  => {
+ const isExisting = getHtml("task",id);
+ if (isExisting) throw new Error('Task with that id already added');
+
+const list = getHtml("list"); 
+
+const preview = document.createElement('li');
+preview.className = "task";
+preview.dataset.task = id;
 
 
 preview.innerHTML = /*html */ `
@@ -39,12 +43,13 @@ preview.innerHTML = /*html */ `
 `;
 
 list.appendChild(preview);
-//};
-
-const updateHtmlTask = (id, changes) => {
-
 };
 
-addTaskToHtml("test");
-addTaskToHtml("test");
 
+window.addEventListener('error', () => {
+    document.body.innerHTML = 'something went very very wrong.please refresh. '
+
+});
+
+addTaskToHtml("test");
+updatedHtmlTask("test", {tittle: "wash the Dog"});
